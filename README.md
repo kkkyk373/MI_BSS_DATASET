@@ -16,3 +16,10 @@ kill [プロセスID]
 - Citi Bike インフォメーション: `datasets/citibike/station_information/`
 - HELLO CYCLING ステータス: `datasets/hellocycle/hellocycling_status/`
 - HELLO CYCLING インフォメーション: `datasets/hellocycle/hellocycling_information/`
+
+クレジット
+- Citi Bike: GBFS `station_status.json` / `station_information.json` (https://gbfs.citibikenyc.com/)
+- HELLO CYCLING: odpt / GBFS `station_status.json` / `station_information.json` (https://api-public.odpt.org/)
+
+ライセンス
+- MIT License (see `LICENSE`)
