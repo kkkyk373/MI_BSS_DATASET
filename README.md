@@ -23,3 +23,20 @@ kill [プロセスID]
 
 ライセンス
 - MIT License (see `LICENSE`)
+
+スリープさせない（macOS）
+- 実行中は別ターミナルで `caffeinate -dimsu` を動かしておくとスリープしません。終了は `Ctrl+C`。
+
+再起動しても自動起動させる（macOS launchd の例）
+1. プロジェクト内のサンプル plist をホームの LaunchAgents に配置  
+   `mkdir -p ~/Library/LaunchAgents`  
+   `cp macos/launchd/mi.bss.citibike.status.plist ~/Library/LaunchAgents/`  
+   `cp macos/launchd/mi.bss.hellocycle.status.plist ~/Library/LaunchAgents/`
+2. 読み込んで常駐開始  
+   `launchctl load -w ~/Library/LaunchAgents/mi.bss.citibike.status.plist`  
+   `launchctl load -w ~/Library/LaunchAgents/mi.bss.hellocycle.status.plist`
+3. 停止するとき  
+   `launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/mi.bss.citibike.status.plist`  
+   `launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/mi.bss.hellocycle.status.plist`
+
+※ `.venv` は `/Users/hideki/projects/MI_BSS_DATASET/.venv` にある前提です。別の場所を使う場合は plist 内のパスを修正してください。
