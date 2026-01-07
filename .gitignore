@@ -14,3 +14,6 @@ wheels/
 
 # datasets
 datasets/
+
+.DS_Store
+*.plist
