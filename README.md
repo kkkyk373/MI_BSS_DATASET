@@ -1,16 +1,41 @@
 使い方
-```python
+## 使い方
+
+### 事前設定（初回のみ）
+```bash
+# AC接続時はシステムスリープを無効化
+sudo pmset -c sleep 0
+```
+
+### 起動（AC電源接続必須）
+```bash
+# スリープしたら止まる
 nohup .venv/bin/python src/collect_citibike_status.py > citibike_status.log 2>&1 &
 nohup .venv/bin/python src/collect_citibike_information.py > citibike_information.log 2>&1 &
-
 nohup .venv/bin/python src/collect_hellocycle_status.py > hellocycle_status.log 2>&1 &
 nohup .venv/bin/python src/collect_hellocycle_information.py > hellocycle_information.log 2>&1 &
 
-# 止めるとき
-ps
+# スリープ対応
+caffeinate -s nice -n 0 .venv/bin/python src/collect_citibike_status.py > citibike_status.log 2>&1 &
+caffeinate -s nice -n 0 .venv/bin/python src/collect_citibike_information.py > citibike_information.log 2>&1 &
+caffeinate -s nice -n 0 .venv/bin/python src/collect_hellocycle_status.py > hellocycle_status.log 2>&1 &
+caffeinate -s nice -n 0 .venv/bin/python src/collect_hellocycle_information.py > hellocycle_information.log 2>&1 &
+```
+**注意**: `caffeinate -s` はAC電源接続時のみ有効。バッテリー駆動では蓋を閉じると停止する。
+
+### 停止
+```bash
+ps aux | grep collect  # プロセスID確認
 kill [プロセスID]
 ```
 
+### ログ確認
+```bash
+tail -f citibike_status.log
+tail -f hellocycle_status.log
+```
+
+## そのほか
 出力先はリポジトリ直下の `datasets/` 配下:
 - Citi Bike ステータス: `datasets/citibike/station_status/`
 - Citi Bike インフォメーション: `datasets/citibike/station_information/`
