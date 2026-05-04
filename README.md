@@ -20,6 +20,10 @@ caffeinate -s nice -n 0 .venv/bin/python src/collect_citibike_status.py > citibi
 caffeinate -s nice -n 0 .venv/bin/python src/collect_citibike_information.py > citibike_information.log 2>&1 &
 caffeinate -s nice -n 0 .venv/bin/python src/collect_hellocycle_status.py > hellocycle_status.log 2>&1 &
 caffeinate -s nice -n 0 .venv/bin/python src/collect_hellocycle_information.py > hellocycle_information.log 2>&1 &
+caffeinate -s nice -n 0 .venv/bin/python src/collect_divvy_status.py > divvy_status.log 2>&1 &
+caffeinate -s nice -n 0 .venv/bin/python src/collect_divvy_information.py > divvy_information.log 2>&1 &
+caffeinate -s nice -n 0 .venv/bin/python src/collect_capitalbikeshare_status.py > capitalbikeshare_status.log 2>&1 &
+caffeinate -s nice -n 0 .venv/bin/python src/collect_capitalbikeshare_information.py > capitalbikeshare_information.log 2>&1 &
 ```
 **注意**: `caffeinate -s` はAC電源接続時のみ有効。バッテリー駆動では蓋を閉じると停止する。
 
